@@ -121,7 +121,7 @@ public class addMonHoc extends javax.swing.JFrame {
         String TenMH = textTenMH.getText();
         
         try {
-            MonHocDAO.addMonHoc(new MonHoc(MaMH,TenMH,"KH_2"));
+            MonHocDAO.addMonHoc(new MonHoc(MaMH,TenMH,"KH_3"));
             JOptionPane.showMessageDialog(this, "Thanh Cong");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Co Lo Xin Kiem Tra Lai");

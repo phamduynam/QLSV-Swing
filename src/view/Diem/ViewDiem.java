@@ -69,6 +69,7 @@ DefaultTableModel tableDiemModel ;
         viewDiemLabel = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        buttonEdit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,6 +105,13 @@ DefaultTableModel tableDiemModel ;
             }
         });
 
+        buttonEdit.setText("Sửa");
+        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,6 +125,8 @@ DefaultTableModel tableDiemModel ;
                 .addContainerGap()
                 .addComponent(addButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(deleteButton)
                 .addGap(18, 18, 18))
         );
@@ -128,7 +138,8 @@ DefaultTableModel tableDiemModel ;
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
-                    .addComponent(deleteButton))
+                    .addComponent(deleteButton)
+                    .addComponent(buttonEdit))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
         );
@@ -163,6 +174,29 @@ DefaultTableModel tableDiemModel ;
         new addDiem().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
+        // TODO add your handling code here:
+        
+        
+        int selectRow = tableDiem.getSelectedRow();
+        if(selectRow == -1){
+            JOptionPane.showMessageDialog(this, "Hay Chon 1 Hang ","Loi" , JOptionPane.ERROR);
+        }else{
+            
+                String MaSV = (String)tableDiem.getValueAt(selectRow,0);
+                String MaMH = (String)tableDiem.getValueAt(selectRow,1);
+                int HocKy = (int)tableDiem.getValueAt(selectRow,2);
+                int Lan = (int)tableDiem.getValueAt(selectRow,3);
+                float Diem = (float)tableDiem.getValueAt(selectRow,4);
+
+                this.dispose();
+                new updateDiem(new Diem(MaSV,MaMH,HocKy,Lan,Diem)).setVisible(true);
+                
+        }
+        
+        
+    }//GEN-LAST:event_buttonEditActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,6 +235,7 @@ DefaultTableModel tableDiemModel ;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
+    private javax.swing.JButton buttonEdit;
     private javax.swing.JButton deleteButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableDiem;

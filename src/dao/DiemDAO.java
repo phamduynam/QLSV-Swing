@@ -162,6 +162,33 @@ public class DiemDAO {
 
     }
     
+        public static void updateDiem(Diem diem) throws SQLException {
+        
+        Connection connection = JDBCConnection.getJDBCCOnection();
+        
+        String sql = "UPDATE Diem SET MaSV = ?, MaMH = ?, HocKy = ?, Lan = ?, Diem = ?";
+        
+            PreparedStatement ps;
+
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, diem.getMaSV());
+            ps.setString(2, diem.getMaMH());
+            ps.setInt(3, diem.getHocKy());
+            ps.setInt(4, diem.getLan());
+            ps.setFloat(5, diem.getDiem());
+            
+            ps.executeUpdate();
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public static void deleteDiemByIdSV(String id){
      
         Connection connection = JDBCConnection.getJDBCCOnection();
