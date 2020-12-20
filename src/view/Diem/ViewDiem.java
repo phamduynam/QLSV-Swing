@@ -7,6 +7,7 @@ package view.Diem;
 
 import dao.DiemDAO;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Diem;
 
@@ -15,14 +16,14 @@ import model.Diem;
  * @author Admin
  */
 public class ViewDiem extends javax.swing.JFrame {
-
+DefaultTableModel tableDiemModel ;
     /**
      * Creates new form ViewDiem
      */
     public ViewDiem() {
         initComponents();
         
-        DefaultTableModel tableDiemModel = new DefaultTableModel(){
+        tableDiemModel = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -35,6 +36,13 @@ public class ViewDiem extends javax.swing.JFrame {
         tableDiemModel.addColumn("Lan");
         tableDiemModel.addColumn("Diem");
         
+       
+        setData();
+        
+    }
+
+    public void setData(){
+    
         ArrayList<Diem> listDiem = DiemDAO.getAllDiem();
 
         tableDiemModel.setRowCount(0);
@@ -44,10 +52,9 @@ public class ViewDiem extends javax.swing.JFrame {
         }
         
         tableDiem.setModel(tableDiemModel);
-        
-        
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -131,6 +138,23 @@ public class ViewDiem extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
+        int selectRow = tableDiem.getSelectedRow();
+        if(selectRow == -1){
+            JOptionPane.showMessageDialog(this, "Hay Chon 1 Hang ","Loi" , JOptionPane.ERROR);
+        }else{
+            
+            int confirm = JOptionPane.showConfirmDialog(this, "Ban Co Chac Muon Xoa Khong ?");
+            
+            if(confirm == JOptionPane.YES_NO_OPTION){
+                String MaSV = (String)tableDiem.getValueAt(selectRow,0);
+                
+                DiemDAO.deleteDiemByIdSV(MaSV);
+                
+                tableDiemModel.setRowCount(0);
+                
+                setData();
+            }
+        }
 
     }//GEN-LAST:event_deleteButtonActionPerformed
 

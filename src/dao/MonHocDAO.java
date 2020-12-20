@@ -35,8 +35,9 @@ public class MonHocDAO {
             while(rs.next()){
                 String MaMH = rs.getString("MaMH");
                 String TenMH = rs.getString("TenMH");
+                String MaKH = rs.getString("MaKH");
                 
-                listMonHoc.add(new MonHoc(MaMH, TenMH));
+                listMonHoc.add(new MonHoc(MaMH, TenMH,MaKH));
                 
             }
             return listMonHoc;
@@ -56,7 +57,7 @@ public class MonHocDAO {
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(0,id);
+            ps.setString(1,id);
             int rs = ps.executeUpdate();
             System.out.println("State Delete MonHoc is : " + rs);
         } catch (SQLException ex) {
@@ -64,20 +65,19 @@ public class MonHocDAO {
         }
     }
     
-    public static void addMonHoc(MonHoc monHoc){
+    public static void addMonHoc(MonHoc monHoc) throws SQLException{
         
         Connection connection = JDBCConnection.getJDBCCOnection();
         
-        String sql = "INSERT INTO MonHoc VALUES(?,?)"; 
-        
-        try {
+        String sql = "INSERT INTO MonHoc(MaMH,TenMH,MaKH) VALUES(?,?,?)"; 
+
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(0,monHoc.getMaMH());
+            ps.setString(1,monHoc.getMaMH());
             ps.setString(2,monHoc.getTenMH());
+            ps.setString(3,monHoc.getMaKH());
             int rs = ps.executeUpdate();
+            
             System.out.println("State Add Mon Hoc is : " + rs);
-        } catch (SQLException ex) {
-            Logger.getLogger(MonHocDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
 }

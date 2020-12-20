@@ -143,11 +143,19 @@ public class addLop extends javax.swing.JFrame {
         String MaMH = (String) maMHCbb.getSelectedItem();
         
         
+
         try {
             LopDAO.addLop(new Lop(MaLop,TenLop,MaMH));
+             JOptionPane.showMessageDialog(this, "Thanh Cong");
         } catch (SQLException ex) {
+            System.out.println("Loi Lop");
             JOptionPane.showMessageDialog(this, "Co Loi Xin Kiem Tra Lai");
+            Logger.getLogger(addLop.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+            
+            
+
         
     }//GEN-LAST:event_addButtonActionPerformed
 

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -146,7 +147,7 @@ public class DiemDAO {
         
         Connection connection = JDBCConnection.getJDBCCOnection();
         
-        String sql = "INSERT INTO Diem VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO Diem(MaSV,MaMH,HocKy,Lan,Diem) VALUES(?,?,?,?,?)";
         
             PreparedStatement ps;
 
@@ -159,9 +160,24 @@ public class DiemDAO {
             
             ps.executeUpdate();
 
-
-        
     }
     
+    public static void deleteDiemByIdSV(String id){
+     
+        Connection connection = JDBCConnection.getJDBCCOnection();
+        
+        String sql = "DELETE FROM Diem WHERE MaSV = " + "'" + id + "'";
+            
+        Statement st;
+        try {
+            st = connection.createStatement();
+     
+            st.executeUpdate(sql);
+                 
+        } catch (SQLException ex) {
+            Logger.getLogger(LopDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
 
 }

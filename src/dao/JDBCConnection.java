@@ -19,7 +19,7 @@ public class JDBCConnection {
     
     // Trả về một kết nối DB
     public static Connection getJDBCCOnection(){
-        String dbURL = "jdbc:sqlserver://CETRICK;databaseName=TEST";
+        String dbURL = "jdbc:sqlserver://CETRICK;databaseName=TEST1";
         String username = "sa";
         String password = "root";
         try {

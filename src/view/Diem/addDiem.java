@@ -10,6 +10,8 @@ import dao.MonHocDAO;
 import dao.SinhVienDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Diem;
 import model.MonHoc;
@@ -199,17 +201,30 @@ public class addDiem extends javax.swing.JFrame {
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         // TODO add your handling code here:
-        String MaSv = (String)maSVComboBox.getSelectedItem();
-        String MaMH = (String)maMHComboBox.getSelectedItem();   
-        int HocKy = Integer.valueOf(hocKyTex.getText()) ;
-        int Lan = Integer.valueOf(lanText.getText()) ;
-        float Diem = Float.valueOf(diemText.getText());
+        String MaSv;
+        String MaMH;
+        int HocKy;
+        int Lan;  
+        float Diem;
+
+        MaSv = (String)maSVComboBox.getSelectedItem();
+        MaMH = (String)maMHComboBox.getSelectedItem();   
+        HocKy = Integer.valueOf(hocKyTex.getText()) ;
+        Lan = Integer.valueOf(lanText.getText()) ;
+        Diem = Float.valueOf(diemText.getText());
+        if(HocKy < 1 || HocKy > 9 || Lan < 1 || Lan > 2 || Diem < 0 || Diem > 10){
+            
+             JOptionPane.showMessageDialog(this, "Hoc Ky <1,9>, Lan <1,2> , Diem <0,10>");
+             return;
+        }
+        
         try {
             DiemDAO.addDiem(new Diem(MaSv,MaMH,HocKy,Lan,Diem));
             JOptionPane.showMessageDialog(this, "Thanh Cong");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Co Loi Xin Kiem Tra Lai");
-        }
+            JOptionPane.showMessageDialog(this, "Co loi xin kiem tra lai");
+            Logger.getLogger(addDiem.class.getName()).log(Level.SEVERE, null, ex);   
+        }            
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

@@ -12,14 +12,25 @@ package model;
 public class MonHoc {
     private String MaMH;
     private String TenMH;
+    private String MaKH;
 
+    public String getMaKH() {
+        return MaKH;
+    }
+
+    public void setMaKH(String MaKH) {
+        this.MaKH = MaKH;
+    }
     public MonHoc() {
     }
 
-    public MonHoc(String MaMH, String TenMH) {
+    public MonHoc(String MaMH, String TenMH, String MaKH) {
         this.MaMH = MaMH;
         this.TenMH = TenMH;
+        this.MaKH = MaKH;
     }
+
+
 
     public String getMaMH() {
         return MaMH;

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import model.Diem;
 import model.SinhVien;
+import view.SinhVien.tam.AddSinhVien;
 
 /**
  *
@@ -23,7 +24,20 @@ public class ViewSinhVien extends javax.swing.JFrame {
     public ViewSinhVien() {
         initComponents();
         
-        DefaultTableModel tableSinhVienModel = new DefaultTableModel();
+        init();
+                
+                
+        
+    }
+    public void init(){
+        
+        DefaultTableModel tableSinhVienModel = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+            
+        };
                 
         tableSinhVienModel.addColumn("MaSV");
         tableSinhVienModel.addColumn("Ho");
@@ -45,8 +59,7 @@ public class ViewSinhVien extends javax.swing.JFrame {
         
         tableSinhVien.setModel(tableSinhVienModel);
         
-                
-                
+        
         
     }
 
@@ -62,6 +75,8 @@ public class ViewSinhVien extends javax.swing.JFrame {
         sinhVienLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableSinhVien = new javax.swing.JTable();
+        buttonAdd = new javax.swing.JButton();
+        buttonDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,27 +96,52 @@ public class ViewSinhVien extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableSinhVien);
 
+        buttonAdd.setText("Thêm");
+        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddActionPerformed(evt);
+            }
+        });
+
+        buttonDelete.setText("Xóa");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(128, 128, 128)
                 .addComponent(sinhVienLabel)
                 .addContainerGap(146, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(buttonAdd)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonDelete)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(sinhVienLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonAdd)
+                    .addComponent(buttonDelete))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
+        // TODO add your handling code here:
+        new AddSinhVien(this).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_buttonAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,6 +179,8 @@ public class ViewSinhVien extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAdd;
+    private javax.swing.JButton buttonDelete;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel sinhVienLabel;
     private javax.swing.JTable tableSinhVien;

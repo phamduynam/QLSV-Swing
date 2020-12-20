@@ -52,7 +52,7 @@ public class LopDAO {
         
         Connection connection = JDBCConnection.getJDBCCOnection();
         
-        String sql = "INSERT INTO Lop VALUES(?,?,?)" ;
+        String sql = "INSERT INTO Lop(MaLop,TenLop,MaMH) VALUES(?,?,?)" ;
         
         PreparedStatement st;
 
